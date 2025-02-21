@@ -1,8 +1,10 @@
 package com.example.zzyzzy.semiprojectv1.domain;
 
+import lombok.Builder;
 import lombok.Data;
 
 @Data // setter,getter,toString 자동 생성
+@Builder
 public class MemberDTO {
 
     private String userid;
@@ -10,5 +12,5 @@ public class MemberDTO {
     private String repasswd;
     private String name;
     private String email;
-    
+
 }
