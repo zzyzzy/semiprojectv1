@@ -59,10 +59,13 @@
                                 <a th:href="|/board/list?cpg=${cpg - 1}|" class="page-link">이전</a></li>
 
                             <th:block th:each="i : ${#numbers.sequence(stblk, stblk + 9)}">
+                                <!-- 출력하는 페이지가 총페이지 수 이하일때 출력 -->
+                                <th:block th:if="${i le cntpg}">
                                 <!-- i 와 cpg가 일치하지 않으면 평범하게 출력 -->
                                 <li th:class="${(i ne cpg) ? 'page-item' : 'page-item active'}">
                                     <a th:href="|/board/list?cpg=${i}|"
                                         class="page-link" th:text="${i}">1</a></li>
+                                </th:block>
                             </th:block>
 
                             <li class="page-item">

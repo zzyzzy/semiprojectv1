@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.test.context.TestConstructor;
 
@@ -24,6 +25,7 @@ public class BoardMapperTest {
 
     // autowired가 아닌 생성자를 이용한 의존성 주입 사용
     private final BoardRepository boardMapper;
+    @Value("${board.page-size}") private int pageSize;
 
     @Test
     @DisplayName("BoardMapper select test")
@@ -32,7 +34,7 @@ public class BoardMapperTest {
         int stnum = 0;  // 조회할 게시물 시작위치
 
         // When : 데이터로 테스트할 기능 호출
-        List<BoardDTO> results = boardMapper.selectBoard(stnum);
+        List<BoardDTO> results = boardMapper.selectBoard(stnum, pageSize);
 
         // Then : 호출되고 난 후 결과값 확인
         log.info("results : {}", results);
