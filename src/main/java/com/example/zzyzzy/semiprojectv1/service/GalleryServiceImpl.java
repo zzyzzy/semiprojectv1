@@ -15,9 +15,9 @@ public class GalleryServiceImpl implements GalleryService {
 
     private final GalleryRepository galleryMapper;
 
-
     @Override
     public List<Gallery> selectGallery() {
         return galleryMapper.selectGallery();
     }
+
 }
