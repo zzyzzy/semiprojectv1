@@ -55,6 +55,8 @@ public class GalleryServiceImpl implements GalleryService {
             }
 
             // 첨부된 파일들 중 첫번째 이미지 파일을 썸네일 처리
+            galleryUploadService.makeThumbnail(
+                    gal.getSimgname(), gis.get(0).getImgname());
         }
 
         return false;
