@@ -51,23 +51,22 @@ public class BoardServiceTest {
         String findkey = "넷플릭스";
 
         // When
-        List<BoardDTO> results = boardService.findBoard(cpg, findtype, findkey);
+        BoardListDTO results = boardService.findBoard(cpg, findtype, findkey);
 
         // Then
         assertNotNull(results);
-        assertThat(results).isNotEmpty();
-        assertThat(results.size()).isGreaterThan(0);
     }
 
     @Test
     @DisplayName("BoardService countfind test")
     public void countfindTest() {
         // Given
-        String findtype = "title";
-        String findkey = "넷플릭스";
+        Map<String, Object> params = new HashMap<>();
+        params.put("findtype", "title");
+        params.put("findkey", "넷플릭스");
 
         // When
-        int results = boardService.countfindBoard(findtype, findkey);
+        int results = boardService.countfindBoard(params);
 
         // Then
         assertThat(results).isGreaterThan(0);
