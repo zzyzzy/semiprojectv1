@@ -1,4 +1,4 @@
-package com.example.zzyzzy.semiprojectv1.config;
+package com.example.zzyzzy.semiprojectv1.custom;
 
 import com.example.zzyzzy.semiprojectv1.domain.User;
 import com.example.zzyzzy.semiprojectv1.repository.UserRepository;
@@ -28,9 +28,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         // 인증에 성공하면 userdetails 객체를 초기화하고 반환
         return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getUserid())
-                .password(user.getPasswd())
-                .roles("USER").build();
+            .username(user.getUserid())
+            .password(user.getPasswd())
+            //.roles("USER")
+            .build();
     }
 
 }
