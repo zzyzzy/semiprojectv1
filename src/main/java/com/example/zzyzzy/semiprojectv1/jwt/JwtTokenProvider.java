@@ -3,19 +3,34 @@ package com.example.zzyzzy.semiprojectv1.jwt;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.xml.bind.DatatypeConverter;
+import java.security.Key;
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
 
     @Value("${jwt.secretKey}")
-    private String secretKey;
+    private String secretString;
 
     @Value("${jwt.validity}")
     private long validity;
+
+    private Key secretKey;
+
+    // jwt 생성시 특수문자가 포함된 비밀키를 사용하게 해 줌
+    @PostConstruct // 의존성 주입후 초기화
+    protected void init() {
+        // secretString의 내용을 byte 배열로 변환후
+        byte[] keyBytes = secretString.getBytes();
+        // JJWT의 안전한 key 생성 방식으로 key 생성
+        secretKey = Keys.hmacShaKeyFor(keyBytes);
+    }
 
     // 주어진 username을 기반으로 새로운 jwt 생성
     // 클레임 : 토큰에 사용할 정보 조각을 의미, 보통 키-값형태로 저장
